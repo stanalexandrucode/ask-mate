@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% block all_questions %}
+    <body>
+
+    <table style="background-color: deepskyblue">
+        <thead>
+            <tr>
+                <td><h3>Submission Time</h3></td>
+                <td><h3>View Number</h3></td>
+                <td><h3>Vote Number</h3></td>
+                <td><h3>Title</h3></td>
+                <td><h3>Message</h3></td>
+                <td><h3>Image</h3></td>
+            </tr>
+        </thead>
+
+        <tbody>
+        <form action="/list" method="GET" >
+                <label for="ordered_by">Order by:</label>
+                <select id="ordered_by" name="ordered_by">
+                    <option selected="selected"> {{ordered_by}} </option>
+                    <option value="submission_time">submission_time</option>
+                    <option value="view_number">view_number</option>
+                    <option value="vote_number">vote_number</option>
+                    <option value="title">title</option>
+                    <option value="message">message</option>
+                </select>
+                <label for="ordered_direction">Ascending/Descending:</label>
+                <select id="ordered_direction" name="ordered_direction">
+                    <option selected="selected"> {{ordered_direction}} </option>
+                    <option value="asc">asc</option>
+                    <option value="desc">desc</option>
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+
+            {% for question in questions %}
+            <tr>
+                <td>{{ question['submission_time'] }}</td>
+                <td>{{ question['view_number'] }}</td>
+                <td>{{ question['vote_number'] }}</td>
+                <td><button type="button" ><a href="/question/{{ question['id'] }}/vote_up">Vote UP</a></button><button type="button" ><a href="/question/{{ question['id'] }}/vote_down">Vote DOWN</a></button></td>
+                <td><a href="/question/{{ question['id'] }}">{{ question['title'] }}</td>
+                <td>{{ question['message'] }}</td>
+                <td><img src="{{ question['image'] }}" height="150" alt="image from url"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button"><a href="/add_question" style="color: cornflowerblue" >Add new question</a></button>
+
+    </body>
+
+{% endblock %}

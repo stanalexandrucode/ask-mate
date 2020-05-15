@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block add_question %}
+
+<a href="/list">Back to questions list</a>
+<h1>Ask a question</h1>
+<form action="/add_question" method="POST">
+    <label for="title">Title:</label><br>
+    <input id="title" name="title" type="text" size="40" placeholder="story title"><br>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" placeholder="message" rows="5" , cols="40"></textarea><br>
+    <label for="image">Add your image url:</label><br>
+    <input type="url" id="image" name="image"><br><br><br>
+    <button type="submit">Add new question</button>
+</form>
+
+{% endblock %}

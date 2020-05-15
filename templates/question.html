@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% block question %}
+<a href="/list">Back to questions list</a>
+<h2>{{ data['title'] }}</h2>
+<table>
+    <thead>
+        <tr>
+            <td>
+                <h4>Submission Time</h4>
+            </td>
+            <td>
+                <h4>View Number</h4>
+            </td>
+            <td>
+                <h4>Vote Number</h4>
+            </td>
+            <td>
+                <h4>Title</h4>
+            </td>
+            <td>
+                <h4>Message</h4>
+            </td>
+            <td>
+                <h4>Image</h4>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ data['submission_time'] }}</td>
+            <td>{{ data['view_number'] }}</td>
+            <td>{{ data['vote_number'] }}</td>
+            <td>{{ data['title'] }}</td>
+            <td>{{ data['message'] }}</td>
+            <td><img src="{{ data['image'] }}" height="150" alt="image from url"></td>
+
+        </tr>
+    </tbody>
+</table><br><br>
+    <button type="button"><a href="/question/{{ id }}/edit">Edit question</a></button><br>
+    <button type="button"><a href="/question/{{ id }}/delete">Delete question</a></button>
+<h3>Answers:</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                <h4>Submission Time</h4>
+            </td>
+            <td colspan="2">
+                <h4>Vote Number</h4>
+            </td>
+            <td>
+                <h4>Message</h4>
+            </td>
+            <td>
+                <h4>Image</h4>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for answer in answers %}
+        <tr>
+            <td>{{ answer['submission_time'] }}</td>
+            <td>{{ answer['vote_number'] }}</td>
+            <td><button type="button"><a href="/answer/{{ answer['id'] }}/vote_up">Vote UP</a></button><button type="button"><a href="/answer/{{ answer['id'] }}/vote_down">Vote DOWN</a></button></td>
+            <td>{{ answer['message'] }}</td>
+            <td><img src="{{ answer['image'] }}" height="150" alt="image from url"></td>
+
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table><br><br>
+<button type="button"><a href="/question/{{ id }}/new_answer">New Answer</a></button>
+
+</body>
+{% endblock %}
